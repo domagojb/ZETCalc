@@ -12,6 +12,8 @@
 		CCBDC9B0225E5D5C00201E0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBDC9AE225E5D5C00201E0C /* Main.storyboard */; };
 		CCBDC9B2225E5D5E00201E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCBDC9B1225E5D5E00201E0C /* Assets.xcassets */; };
 		CCBDC9B5225E5D5E00201E0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBDC9B3225E5D5E00201E0C /* LaunchScreen.storyboard */; };
+		CCBDC9BE225E6C5E00201E0C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDC9BD225E6C5E00201E0C /* UserNotifications.framework */; };
+		CCBDC9C0225FBC4000201E0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDC9BF225FBC4000201E0C /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		CCBDC9B1225E5D5E00201E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCBDC9B4225E5D5E00201E0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCBDC9B6225E5D5E00201E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCBDC9BD225E6C5E00201E0C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		CCBDC9BF225FBC4000201E0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCBDC9C0225FBC4000201E0C /* AudioToolbox.framework in Frameworks */,
+				CCBDC9BE225E6C5E00201E0C /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +46,7 @@
 			children = (
 				CCBDC9A9225E5D5C00201E0C /* ZETCalc */,
 				CCBDC9A8225E5D5C00201E0C /* Products */,
+				CCBDC9BC225E6C5E00201E0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +69,15 @@
 				CCBDC9B6225E5D5E00201E0C /* Info.plist */,
 			);
 			path = ZETCalc;
+			sourceTree = "<group>";
+		};
+		CCBDC9BC225E6C5E00201E0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCBDC9BF225FBC4000201E0C /* AudioToolbox.framework */,
+				CCBDC9BD225E6C5E00201E0C /* UserNotifications.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
