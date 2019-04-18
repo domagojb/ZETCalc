@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="ZETCalc_Widget" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qZL-yC-asS">
+                                <rect key="frame" x="8" y="8" width="304" height="68"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ckw-rE-MJc">
+                                        <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Bsf-3w-Zq2">
+                                                <rect key="frame" x="0.0" y="0.0" width="148" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100kn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5s-3A-Lzw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="17.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No  ride in progress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVD-fb-0yB">
+                                                        <rect key="frame" x="0.0" y="17.5" width="148" height="12.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekd-TO-3VA" customClass="RideControl" customModule="ZETCalc_Framework">
+                                                <rect key="frame" x="156" y="0.0" width="148" height="30"/>
+                                                <color key="backgroundColor" red="0.050980392159999999" green="0.63529411759999999" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rij-cQ-sxw">
+                                        <rect key="frame" x="0.0" y="38" width="304" height="30"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1DR-bR-U4d" customClass="RideControl" customModule="ZETCalc_Framework">
+                                                <rect key="frame" x="0.0" y="0.0" width="148" height="30"/>
+                                                <color key="backgroundColor" red="0.52941176469999995" green="0.7725490196" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRW-Sq-KbL" customClass="RideControl" customModule="ZETCalc_Framework">
+                                                <rect key="frame" x="156" y="0.0" width="148" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="qZL-yC-asS" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="8" id="Ekx-fu-eT5"/>
+                            <constraint firstItem="qZL-yC-asS" firstAttribute="trailing" secondItem="ssy-KU-ocm" secondAttribute="trailing" constant="-8" id="T8Q-Jn-WhS"/>
+                            <constraint firstItem="qZL-yC-asS" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" constant="8" id="gUu-nU-clR"/>
+                            <constraint firstAttribute="bottom" secondItem="qZL-yC-asS" secondAttribute="bottom" constant="8" id="uVW-2t-GNw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="84"/>
+                    <connections>
+                        <outlet property="rideLabel" destination="GVD-fb-0yB" id="nvi-YT-dC1"/>
+                        <outlet property="rideLevelOneControl" destination="ekd-TO-3VA" id="2fg-Vr-hbD"/>
+                        <outlet property="rideLevelThreeControl" destination="dRW-Sq-KbL" id="k4c-EM-MiG"/>
+                        <outlet property="rideLevelTwoControl" destination="1DR-bR-U4d" id="rgx-BZ-oee"/>
+                        <outlet property="statusLabel" destination="u5s-3A-Lzw" id="kMZ-1C-GP3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="20.424107142857142"/>
+        </scene>
+    </scenes>
+</document>
