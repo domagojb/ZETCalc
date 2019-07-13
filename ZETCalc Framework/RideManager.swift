@@ -9,26 +9,68 @@
 import Foundation
 import UserNotifications
 
-public protocol RideManagerDelegate: AnyObject {
-    func rideManager(_ manager: RideManager, didUpdateState state: Int)
-    func rideManager(_ manager: RideManager, rideInProgreess until: Date)
+fileprivate extension String {
+    static let historyPeristanceKey = "HistoryPersistanceKey"
+    static let datePeristanceKey = "DatePersistanceKey"
+    static let rideLevelPeristanceKey = "RideLevelPeristanceKey"
 }
 
-public class RideManager {
+fileprivate struct RideHistoryStorage {
     
-    private let storage: UserDefaults! = UserDefaults(suiteName: "group.data.com.domagoj.personal.MojZET")
+    let storage: UserDefaults
+    
+    func saveRideToHistory(_ ride: Ride) {
+        var history = loadHistory()
+        history.insert(ride, at: 0)
+        do {
+            try storage.set(PropertyListEncoder().encode(history), forKey: .historyPeristanceKey)
+        } catch {
+            fatalError("Bummer")
+        }
+    }
+    
+    func loadHistory() -> [Ride] {
+        
+        guard let data = storage.object(forKey: .historyPeristanceKey) as? Data else {
+            return []
+        }
+        
+        do {
+            return try PropertyListDecoder().decode([Ride].self, from: data)
+        } catch {
+            fatalError("Bummer 2")
+        }
+        
+    }
+}
+
+public struct RideLevel: Codable {
+    public private(set) var price: UInt
+    public private(set) var time: UInt // minutes
+}
+
+public struct Ride: Codable {
+    public let date: Date
+    public let level: RideLevel
+}
+
+public protocol RideManagerDelegate: AnyObject {
+    func rideManager(_ manager: RideManager, didUpdateState state: Int)
+    func rideManager(_ manager: RideManager, rideInProgreess ride: Ride)
+}
+
+final public class RideManager {
+    
+    private let storage: UserDefaults = UserDefaults(suiteName: "group.data.com.domagoj.personal.MojZET")!
     
     private let StatePersistanceKey = "StatePersistanceKey"
-    private let RidePersistanceKey = "RidePersistanceKey"
+    private let RidePersistanceKey = "RidePersistanceKey_v2"
+    
+    private let rideHistory: RideHistoryStorage
     
     public static let shared = RideManager()
     
     public weak var delegate: RideManagerDelegate?
-    
-    public struct RideLevel {
-        public private(set) var price: UInt
-        public private(set) var time: UInt // minutes
-    }
     
     public static let RideLevelOne = RideLevel(price: 4, time: 30)
     public static let RideLevelTwo = RideLevel(price: 7, time: 60)
@@ -42,26 +84,43 @@ public class RideManager {
         }
     }
     
-    public private(set) var ride: Date? {
+    public private(set) var ride: Ride? {
         
         get {
-            if let date = storage.object(forKey: RidePersistanceKey) as? Date {
-                
-                if date < Date() {
-                    return nil
-                }
-                
-                return date
-                
-            } else {
+            
+            let ride: Ride
+            
+            guard let data = storage.object(forKey: RidePersistanceKey) as? Data else {
                 return nil
             }
+            
+            do {
+                try ride = PropertyListDecoder().decode(Ride.self, from: data)
+            } catch {
+                fatalError("Mega error")
+            }
+            
+            if ride.date < Date() {
+                return nil
+            }
+            
+            return ride
         }
         
         set {
-            storage.set(newValue, forKey: RidePersistanceKey)
+            
+            do {
+                try storage.set(PropertyListEncoder().encode(newValue), forKey: RidePersistanceKey)
+            } catch {
+                fatalError("Mega error")
+            }
+            
             self.delegate?.rideManager(self, rideInProgreess: newValue!)
         }
+    }
+    
+    private init() {
+        rideHistory = RideHistoryStorage(storage: storage)
     }
     
     public func topUp(for value: UInt) {
@@ -78,7 +137,11 @@ public class RideManager {
         
         self.state = state - level.price
         
-        self.ride = Date(timeIntervalSinceNow: Double(level.time * 60))
+        let date = Date(timeIntervalSinceNow: Double(level.time * 60))
+        
+        self.ride = Ride(date: date, level: level)
+        
+        saveRideToHistory(ride!)
         
         if notify {
             self.scheduleRideEndNotifications(in: level.time)
@@ -89,6 +152,14 @@ public class RideManager {
     
     public func cancelNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
+    private func saveRideToHistory(_ ride: Ride) {
+        rideHistory.saveRideToHistory(ride)
+    }
+    
+    public func loadRideHistory() -> [Ride] {
+        return rideHistory.loadHistory()
     }
 }
 

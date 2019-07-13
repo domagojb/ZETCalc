@@ -23,6 +23,7 @@
 		CCBDC9B5225E5D5E00201E0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBDC9B3225E5D5E00201E0C /* LaunchScreen.storyboard */; };
 		CCBDC9BE225E6C5E00201E0C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDC9BD225E6C5E00201E0C /* UserNotifications.framework */; };
 		CCBDC9C0225FBC4000201E0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBDC9BF225FBC4000201E0C /* AudioToolbox.framework */; };
+		CCDF490F22B2D12F00517E86 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDF490E22B2D12F00517E86 /* HistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		CCBDC9B6225E5D5E00201E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCBDC9BD225E6C5E00201E0C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		CCBDC9BF225FBC4000201E0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CCDF490E22B2D12F00517E86 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				CCB407C322690201006BD13F /* ZETCalc.entitlements */,
 				CCBDC9AA225E5D5C00201E0C /* AppDelegate.swift */,
 				CCBDC9AC225E5D5C00201E0C /* ViewController.swift */,
+				CCDF490E22B2D12F00517E86 /* HistoryViewController.swift */,
 				CCBDC9AE225E5D5C00201E0C /* Main.storyboard */,
 				CCBDC9B1225E5D5E00201E0C /* Assets.xcassets */,
 				CCBDC9B3225E5D5E00201E0C /* LaunchScreen.storyboard */,
@@ -357,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCDF490F22B2D12F00517E86 /* HistoryViewController.swift in Sources */,
 				CCBDC9AD225E5D5C00201E0C /* ViewController.swift in Sources */,
 				CCBDC9AB225E5D5C00201E0C /* AppDelegate.swift in Sources */,
 			);

@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         RideManager.shared.delegate = self
         
         self.refreshStateLabel()
-        self.updateRideStatus(rideEndDate: RideManager.shared.ride)
+        self.updateRideStatus(with: RideManager.shared.ride)
         
         self.remindersSwitch.isOn = self.remindersEnabled
         self.updateNotificationsWarning()
@@ -77,11 +77,11 @@ class ViewController: UIViewController {
         UINotificationFeedbackGenerator().notificationOccurred(success ? .success : .error)
     }
     
-    private func updateRideStatus(rideEndDate: Date?) {
-        if let date = rideEndDate {
+    private func updateRideStatus(with ride: Ride?) {
+        if let ride = ride {
             let format = DateFormatter()
             format.dateFormat = "HH:mm"
-            self.rideStatusLabel.text = "Ride ends at " + format.string(from: date)
+            self.rideStatusLabel.text = "\(ride.level.price)kn ride ends at " + format.string(from: ride.date)
         } else {
             self.rideStatusLabel.text = "No rides in progress"
         }
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
     
     @objc private func appWillEnterForeground() {
         self.refreshStateLabel()
-        self.updateRideStatus(rideEndDate: RideManager.shared.ride)
+        self.updateRideStatus(with: RideManager.shared.ride)
         self.updateNotificationsWarning()
     }
 }
@@ -160,6 +160,12 @@ extension ViewController {
     @IBAction func didTapCancelReminder(_ sender: Any) {
         RideManager.shared.cancelNotifications()
     }
+    
+    @IBAction func didTapHistoryButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "HistoryViewController")
+        self.present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -179,8 +185,8 @@ extension ViewController: RideManagerDelegate {
         self.refreshStateLabel()
     }
     
-    func rideManager(_ manager: RideManager, rideInProgreess until: Date) {
-        self.updateRideStatus(rideEndDate: until)
+    func rideManager(_ manager: RideManager, rideInProgreess ride: Ride) {
+        self.updateRideStatus(with: ride)
     }
 }
 

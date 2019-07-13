@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         
         self.refreshStateLabel()
-        self.updateRideStatus(rideEndDate: RideManager.shared.ride)
+        self.updateRideStatus(with: RideManager.shared.ride)
         
         let fontSize: CGFloat = 17
         
@@ -41,13 +41,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.refreshStateLabel()
-        self.updateRideStatus(rideEndDate: RideManager.shared.ride)
+        self.updateRideStatus(with: RideManager.shared.ride)
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         
         self.refreshStateLabel()
-        self.updateRideStatus(rideEndDate: RideManager.shared.ride)
+        self.updateRideStatus(with: RideManager.shared.ride)
         
         completionHandler(NCUpdateResult.newData)
     }
@@ -56,11 +56,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.statusLabel.text = RideManager.shared.state.description + "kn";
     }
     
-    private func updateRideStatus(rideEndDate: Date?) {
-        if let date = rideEndDate {
+    private func updateRideStatus(with ride: Ride?) {
+        if let ride = ride {
             let format = DateFormatter()
             format.dateFormat = "HH:mm"
-            self.rideLabel.text = "Ride ends at " + format.string(from: date)
+            self.rideLabel.text = "\(ride.level.price)kn ride ends at " + format.string(from: ride.date)
         } else {
             self.rideLabel.text = "No rides in progress"
         }
@@ -95,7 +95,7 @@ extension TodayViewController: RideManagerDelegate {
         self.refreshStateLabel()
     }
     
-    func rideManager(_ manager: RideManager, rideInProgreess until: Date) {
-        self.updateRideStatus(rideEndDate: until)
+    func rideManager(_ manager: RideManager, rideInProgreess ride: Ride) {
+        self.updateRideStatus(with: ride)
     }
 }
