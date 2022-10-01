@@ -8,6 +8,7 @@
 
 import Foundation
 import UserNotifications
+import Combine
 
 fileprivate extension String {
     static let historyPeristanceKey = "HistoryPersistanceKey"
@@ -80,8 +81,15 @@ final public class RideManager {
         get { return UInt(storage.integer(forKey: StatePersistanceKey)) }
         set {
             storage.set(newValue, forKey: StatePersistanceKey)
+            stateSubject.send(newValue)
             self.delegate?.rideManager(self, didUpdateState: Int(newValue))
         }
+    }
+
+    let stateSubject: PassthroughSubject<UInt, Never> = PassthroughSubject()
+
+    public var statePublisher: some Publisher<UInt, Never> {
+        stateSubject
     }
     
     public private(set) var ride: Ride? {
@@ -114,9 +122,17 @@ final public class RideManager {
             } catch {
                 fatalError("Mega error")
             }
+
+            rideSubject.send(newValue)
             
             self.delegate?.rideManager(self, rideInProgreess: newValue!)
         }
+    }
+
+    let rideSubject: PassthroughSubject<Ride?, Never> = PassthroughSubject()
+
+    public var ridePublisher: some Publisher<Ride?, Never> {
+        rideSubject
     }
     
     private init() {
